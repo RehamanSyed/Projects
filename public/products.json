@@ -1,0 +1,182 @@
+[
+    {
+      "id": 1,
+      "title": "Fjallraven Backpack",
+      "price": 109.95,
+      "description": "Perfect pack for everyday use and hikes. Fits laptops up to 15 inches.",
+      "category": "men's clothing",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "availableStock": 5
+    },
+    {
+      "id": 2,
+      "title": "Slim Fit T-Shirts",
+      "price": 22.3,
+      "description": "Slim-fitting shirt with raglan long sleeves and a 3-button placket.",
+      "category": "men's clothing",
+      "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+      "availableStock": 0
+    },
+    {
+      "id": 3,
+      "title": "Mens Cotton Jacket",
+      "price": 55.99,
+      "description": "Great jacket for spring, autumn, and winter. Perfect for outdoor activities.",
+      "category": "men's clothing",
+      "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+      "availableStock": 7
+    },
+    {
+      "id": 4,
+      "title": "Casual Slim Fit Pants",
+      "price": 15.99,
+      "description": "Comfortable slim-fit pants. Available in multiple colors and sizes.",
+      "category": "men's clothing",
+      "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+      "availableStock": 3
+    },
+    {
+      "id": 5,
+      "title": "Dragon Chain Bracelet",
+      "price": 695,
+      "description": "Gold & silver bracelet featuring a dragon design. A stylish and meaningful piece.",
+      "category": "jewelry",
+      "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+      "availableStock": 1
+    },
+    {
+      "id": 6,
+      "title": "Gold Micropave Ring",
+      "price": 168,
+      "description": "Petite solid gold ring with micropave diamonds. Elegant and dainty.",
+      "category": "jewelry",
+      "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+      "availableStock": 2
+    },
+    {
+      "id": 7,
+      "title": "Gold Plated Princess Ring",
+      "price": 9.99,
+      "description": "Simple yet elegant wedding engagement ring. Perfect for special occasions.",
+      "category": "jewelry",
+      "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+      "availableStock": 2
+    },
+    {
+      "id": 8,
+      "title": "Rose Gold Earrings",
+      "price": 10.99,
+      "description": "Rose gold-plated stainless steel earrings. Classic double-flared design.",
+      "category": "jewelry",
+      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
+      "availableStock": 4
+    },
+    {
+      "id": 9,
+      "title": "2TB External Hard Drive",
+      "price": 64,
+      "description": "Portable 2TB USB 3.0 hard drive for fast data transfer and PC performance.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+      "availableStock": 6
+    },
+    {
+      "id": 10,
+      "title": "1TB SSD",
+      "price": 109,
+      "description": "1TB SATA III SSD for faster boot-up and application load. Reliable and fast.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+      "availableStock": 3
+    },
+    {
+      "id": 11,
+      "title": "256GB SSD",
+      "price": 109,
+      "description": "High-speed 256GB SSD for faster boot-up and improved system performance.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+      "availableStock": 1
+    },
+    {
+      "id": 12,
+      "title": "4TB Gaming Hard Drive",
+      "price": 114,
+      "description": "High-capacity 4TB external hard drive for PlayStation 4 gaming.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+      "availableStock": 8
+    },
+    {
+      "id": 13,
+      "title": "21.5\" Full HD IPS Monitor",
+      "price": 599,
+      "description": "21.5-inch Full HD IPS display with 75Hz refresh rate and 4ms response time.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
+      "availableStock": 4
+    },
+    {
+      "id": 14,
+      "title": "49\" Curved Gaming Monitor",
+      "price": 999.99,
+      "description": "Super ultrawide 49-inch curved gaming monitor with 144Hz refresh rate.",
+      "category": "electronics",
+      "image": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+      "availableStock": 1
+    },
+    {
+      "id": 15,
+      "title": "3-in-1 Snowboard Jacket",
+      "price": 56.99,
+      "description": "Women's 3-in-1 snowboard jacket with detachable liner and adjustable hood.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
+      "availableStock": 6
+    },
+    {
+      "id": 16,
+      "title": "Faux Leather Moto Jacket",
+      "price": 29.95,
+      "description": "Women's faux leather moto jacket with a removable hood and stylish details.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
+      "availableStock": 5
+    },
+    {
+      "id": 17,
+      "title": "Windbreaker Rain Jacket",
+      "price": 39.99,
+      "description": "Lightweight women's windbreaker raincoat with adjustable drawstrings and hood.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
+      "availableStock": 4
+    },
+    {
+      "id": 18,
+      "title": "Boat Neck V-Neck Shirt",
+      "price": 9.85,
+      "description": "Simple and comfortable women's shirt made from rayon and spandex.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
+      "availableStock": 1
+    },
+    {
+      "id": 19,
+      "title": "Moisture-Wicking Shirt",
+      "price": 7.95,
+      "description": "Breathable and lightweight polyester shirt with moisture-wicking fabric.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
+      "availableStock": 8
+    },
+    {
+      "id": 20,
+      "title": "Casual Cotton T-Shirt",
+      "price": 12.99,
+      "description": "Soft cotton T-shirt with a V-neck and casual letter print design.",
+      "category": "women's clothing",
+      "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+      "availableStock": 15
+    }
+  ]
