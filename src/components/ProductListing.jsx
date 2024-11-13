@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +15,15 @@ const ProductListing = ({ product }) => {
   const cartItems = useSelector((state) => state.cart.items);
 
   const updatedProduct = products.find((p) => p.id === product.id);
-  const quantity = cartItems?.find((f) => f.id === product.id)?.quantity;
+
+  const cartitem = cartItems?.find((f) => f.id === product.id);
 
   const handleAddToCart = () => {
     dispatch(addToCart(updatedProduct));
   };
   const handleIncrement = () => {
+
+    
     dispatch(incrementQuantity({ id: product.id }));
   };
   const handleDecrement = () => {
@@ -29,19 +32,20 @@ const ProductListing = ({ product }) => {
   const handleRemoveCartItem = () => {
     dispatch(removeFromCart({ id: product.id }));
   };
+
   return (
     <div className={styles.product}>
       <Image
-        src={updatedProduct.image}
-        alt={updatedProduct.title}
+        src={"/no-img.png"}
+        alt={updatedProduct?.title}
         width={200}
         height={200}
       />
       <h5>{updatedProduct.title}</h5>
-      <p>stock: {updatedProduct.availableStock}</p>
+      <p style={{ margin: "10px 0px" }}>stock: {cartitem?.availableStock}</p>
       <p>{updatedProduct.price}</p>
-      <div>
-        {quantity > 0 ? (
+      <div style={{ marginTop: "10px" }}>
+        {cartitem?.quantity > 0 ? (
           <div
             style={{
               display: "flex",
@@ -50,12 +54,12 @@ const ProductListing = ({ product }) => {
               width: "100%",
             }}
           >
-            {quantity <= 1 ? (
+            {cartitem?.quantity <= 1 ? (
               <button onClick={handleRemoveCartItem}>X</button>
             ) : (
               <button onClick={handleDecrement}>-</button>
             )}
-            <button>{quantity}</button>
+            <button>{cartitem?.quantity}</button>
             <button onClick={handleIncrement}>+</button>
           </div>
         ) : updatedProduct.availableStock > 0 ? (
