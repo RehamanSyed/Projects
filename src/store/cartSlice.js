@@ -12,8 +12,8 @@ const loadCartFromLocalStorage = () => {
 
 // Initial state for the cart
 const initialState = {
-  items: loadCartFromLocalStorage(), // Array of cart items
-  products: [],
+  items: [], // Array of cart items
+  products: [], // Array of all available products
 };
 
 // Create the cart slice
@@ -31,29 +31,28 @@ const cartSlice = createSlice({
 
       // Prevent adding more than available stock
       if (existingItem) {
-        if (existingItem.quantity < product.availableStock) {
-          existingItem.quantity += 1;
-
-          // Decrease stock after adding to cart
-          state.products = state.products.map((item) =>
-            item.id === product.id
-              ? { ...item, availableStock: item.availableStock - 1 }
-              : item
-          );
-        }
+        existingItem.quantity += 1;
+        // Decrease stock after adding to cart
+        state.products = state.products.map((item) =>
+          item.id === product.id
+            ? { ...item, availableStock: item.availableStock - 1 }
+            : item
+        );
+        // if (existingItem.quantity < product.availableStock) {
+        // }
       } else {
-        if (product.availableStock > 0) {
-          state.items.push({ ...product, quantity: 1 });
-          // Decrease stock after adding to cart
-
-          state.products = state.products.map((item) =>
-            item.id === product.id
-              ? { ...item, availableStock: item.availableStock - 1 }
-              : item
-          );
-        }
+        state.items.push({ ...product, quantity: 1 });
+        state.products = state.products.map((item) =>
+          item.id === product.id
+            ? { ...item, availableStock: item.availableStock - 1 }
+            : item
+        );
+        // if (product.availableStock > 0) {
+        //   // Decrease stock after adding to cart
+        // }
       }
 
+      // Update localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
@@ -62,34 +61,38 @@ const cartSlice = createSlice({
       const item = state.items.find((f) => f.id === action.payload.id);
       if (item) {
         const product = state.products.find((f) => f.id === item.id);
-
         // Prevent incrementing if stock is exhausted
-        if (item.quantity < product.availableStock) {
-          item.quantity += 1;
+        item.quantity += 1;
 
-          // Decrease stock after increment
-          state.products = state.products.map((product) =>
-            product.id === item.id
-              ? { ...product, availableStock: product.availableStock - 1 }
-              : product
-          );
-        }
+        // Decrease stock after increment
+        state.products = state.products.map((product) =>
+          product.id === item.id
+            ? { ...product, availableStock: product.availableStock - 1 }
+            : product
+        );
+        // if (item.quantity < product.availableStock) {
+        // }
       }
+
+      // Update localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
     },
     decrementQuantity: (state, action) => {
       const item = state.items.find((f) => f.id === action.payload.id);
-      if (item && item.quantity > 1) {
-        item.quantity -= 1;
+      item.quantity -= 1;
 
-        state.products = state.products.map((product) =>
-          product.id === item.id
-            ? { ...product, availableStock: product.availableStock + 1 }
-            : product
-        );
-      }
+      // Increase stock after decrement
+      state.products = state.products.map((product) =>
+        product.id === item.id
+          ? { ...product, availableStock: product.availableStock + 1 }
+          : product
+      );
+      // if (item && item.quantity > 1) {
+      // }
+
+      // Update localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
@@ -99,7 +102,7 @@ const cartSlice = createSlice({
 
       if (product) {
         state.items = state.items.filter((f) => f.id !== action.payload.id);
-
+        // Increase stock after removing from cart
         state.products = state.products.map((item) =>
           item.id === product.id
             ? {
@@ -109,11 +112,14 @@ const cartSlice = createSlice({
             : item
         );
       }
+
+      // Update localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
     },
     clearCart: (state) => {
+      // Iterate over cart items and increase product stock based on quantity
       state.items.forEach((item) => {
         const product = state.products.find((prod) => prod.id === item.id);
         if (product) {
@@ -121,6 +127,8 @@ const cartSlice = createSlice({
         }
       });
       state.items = [];
+
+      // Remove from localStorage
       if (typeof window !== "undefined") {
         localStorage.removeItem("cart");
       }
@@ -134,7 +142,7 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-  clearCart
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

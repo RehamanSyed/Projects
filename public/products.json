@@ -29,7 +29,7 @@
     "price": 15.99,
     "category": "men's clothing",
     "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-    "availableStock": 3
+    "availableStock": 0
   },
   {
     "id": 5,
@@ -69,7 +69,7 @@
     "price": 64,
     "category": "electronics",
     "image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-    "availableStock": 6
+    "availableStock": 0
   },
   {
     "id": 10,

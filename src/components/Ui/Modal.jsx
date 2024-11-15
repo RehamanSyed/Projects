@@ -1,19 +1,40 @@
-// components/Modal.js
-import React from "react";
-import styles from "../../styles/Modal.module.css";
+import ReactDOM from "react-dom";
+import { useEffect } from "react";
+import IconButton from "./IconButton";
+import { MdClose } from "react-icons/md";
 
-const Modal = ({ isOpen, closeModal, children }) => {
-  if (!isOpen) return null; // Don't render the modal if it's not open
+const Modal = ({ isOpen, onClose, children }) => {
+  // Prevent scrolling on body when the modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
 
-  return (
-    <div className={styles.overlay} onClick={closeModal}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={closeModal}>
-          &times;
-        </button>
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return ReactDOM.createPortal(
+    <div className={`modalBackdrop ${isOpen ? "open" : ""}`} onClick={onClose}>
+      <div
+        className={`modalContent ${isOpen ? "open" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
+        <IconButton
+          icon={<MdClose size={24} />}
+          variant="btn-plain-primary btn-rounded closeButton"
+          onClick={onClose}
+          className={"closeButton"}
+        />
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

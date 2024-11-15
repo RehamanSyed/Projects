@@ -1,0 +1,57 @@
+// styles/utils/_variables.scss
+
+// Colors
+$primary-color: #007bff;
+$secondary-color: #2ecc71;
+$accent-color: #e74c3c;
+$background-color: #f9f9f9;
+$text-color: #333;
+$muted-color: #95a5a6;
+
+// Typography
+$font-family: "Poppins", sans-serif;
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * 0.75;
+$font-size-md: $font-size-base * 1.5;
+$font-size-lg: $font-size-base * 2;
+$line-height-base: 1.5;
+
+$base-margin: 4px;
+$base-padding: 4px;
+$base-font-size: 1rem;
+
+// Spacing (in px)
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 32px;
+$space-xl: 64px;
+
+//borders
+$base-border-thickness: 1px;
+$base-border-radius: 40px;
+
+
+$breakpoints: (
+  "xs": 0,
+  "sm": 480,
+  "md": 720,
+  "lg": 960,
+  "xl": 1200px,
+  "xxl": 1440px,
+);
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+
+// Color palette
+
+$colors: (
+  "primary": $primary-color,
+  "secondary": $secondary-color,
+  "error": #bb1c1c,
+  "info": #1c41bb,
+);

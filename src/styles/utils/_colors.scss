@@ -1,0 +1,19 @@
+@each $key, $value in $colors {
+  .text-#{$key} {
+    color: $value;
+  }
+  .bg-#{$key} {
+    background-color: $value;
+  }
+  @if ($value != white) {
+    // light variation
+    @for $i from 1 through 9 {
+      .text-#{$key}-light-#{$i} {
+        color: mix(white, $value, $i * 10);
+      }
+      .bg-#{$key}-light-#{$i} {
+        background-color: mix(white, $value, $i * 10);
+      }
+    }
+  }
+}

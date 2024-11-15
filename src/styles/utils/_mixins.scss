@@ -1,0 +1,75 @@
+// styles/utils/_mixins.scss
+@use "sass:math";
+
+// Flexbox Centering Mixin
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin btn($bg-color: #e2e2e2) {
+  display: inline-flex;
+  font-family: $font-family; // change
+  padding: $space-sm $space-md;
+  font-size: $font-size-sm;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;  
+  border-radius: .25rem;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+  color: #fff;
+  background-color: $bg-color;
+  line-height: $line-height-base;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}
+
+// Media Query Mixin
+@mixin media-query($size) {
+  @if $size == small {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $size == medium {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $size == large {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $size == xlarge {
+    @media (max-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+@mixin xs {
+  @media (min-width: map-get($breakpoints, "xs")) {
+    @content;
+  }
+}
+@mixin sm {
+  @media (min-width: map-get($breakpoints, "sm")) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: map-get($breakpoints, "md")) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: map-get($breakpoints, "lg")) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: map-get($breakpoints, "xl")) {
+    @content;
+  }
+}

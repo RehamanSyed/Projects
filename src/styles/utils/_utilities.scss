@@ -1,0 +1,187 @@
+@use "sass:math";
+
+$utilities: (
+  "padding": (
+    "prefix": "p",
+    "value": (
+      "0": 0,
+      "1": $base-padding,
+      "2": $base-padding * 2,
+      "3": $base-padding * 4,
+      "4": $base-padding * 6,
+      "5": $base-padding * 8,
+    ),
+  ),
+  "padding-left": (
+    "prefix": "pl",
+    "value": (
+      "0": 0,
+      "1": $base-padding,
+      "2": $base-padding * 2,
+      "3": $base-padding * 4,
+      "4": $base-padding * 6,
+      "5": $base-padding * 8,
+    ),
+  ),
+  "padding-right": (
+    "prefix": "pr",
+    "value": (
+      "0": 0,
+      "1": $base-padding,
+      "2": $base-padding * 2,
+      "3": $base-padding * 4,
+      "4": $base-padding * 6,
+      "5": $base-padding * 8,
+    ),
+  ),
+  "padding-top": (
+    "prefix": "pt",
+    "value": (
+      "0": 0,
+      "1": $base-padding,
+      "2": $base-padding * 2,
+      "3": $base-padding * 4,
+      "4": $base-padding * 6,
+      "5": $base-padding * 8,
+    ),
+  ),
+  "padding-bottom": (
+    "prefix": "pb",
+    "value": (
+      "0": 0,
+      "1": $base-padding,
+      "2": $base-padding * 2,
+      "3": $base-padding * 4,
+      "4": $base-padding * 6,
+      "5": $base-padding * 8,
+    ),
+  ),
+  "margin": (
+    "prefix": "m",
+    "value": (
+      "0": 0,
+      "1": $base-margin,
+      "2": $base-margin * 2,
+      "3": $base-margin * 4,
+      "4": $base-margin * 6,
+      "5": $base-margin * 8,
+    ),
+  ),
+  "margin-left": (
+    "prefix": "ml",
+    "value": (
+      "0": 0,
+      "1": $base-margin,
+      "2": $base-margin * 2,
+      "3": $base-margin * 4,
+      "4": $base-margin * 6,
+      "5": $base-margin * 8,
+    ),
+  ),
+  "margin-right": (
+    "prefix": "mr",
+    "value": (
+      "0": 0,
+      "1": $base-margin,
+      "2": $base-margin * 2,
+      "3": $base-margin * 4,
+      "4": $base-margin * 6,
+      "5": $base-margin * 8,
+    ),
+  ),
+  "margin-top": (
+    "prefix": "mt",
+    "value": (
+      "0": 0,
+      "1": $base-margin,
+      "2": $base-margin * 2,
+      "3": $base-margin * 4,
+      "4": $base-margin * 6,
+      "5": $base-margin * 8,
+    ),
+  ),
+  "margin-bottom": (
+    "prefix": "mb",
+    "value": (
+      "0": 0,
+      "1": $base-margin,
+      "2": $base-margin * 2,
+      "3": $base-margin * 4,
+      "4": $base-margin * 6,
+      "5": $base-margin * 8,
+    ),
+  ),
+  "font-size": (
+    "prefix": "font-size",
+    "value": (
+      "xs": $font-size-base,
+      "sm": $font-size-base * 2,
+      "md": $font-size-base * 3,
+      "lg": $font-size-base * 4,
+      "xl": $font-size-base * 5,
+    ),
+  ),
+  "border": (
+    "prefix": "border",
+    "value": (
+      "1": 1px solid #eeeeee,
+      "2": 2px solid #eeeeee,
+      "3": 3px solid #eeeeee,
+    ),
+  ),
+  "gap": (
+    "prefix": "gap",
+    "value": (
+      "0": 0,
+      "1": 2,
+      "2": 4,
+      "3": 6,
+      "4": 8,
+      "5": 10,
+    ),
+  ),
+  "display": (
+    "prefix": "display",
+    "value": (
+      "none": none,
+      "flex": flex,
+      "grid": grid,
+      "block": block,
+      "inline-block": inline-block,
+      "inline": inline,
+      "hidden": hidden,
+      "visible": visible,
+      "flex-grow": flex-grow,
+      "flex-shrink": flex-shrink,
+      "flex-basis": flex-basis,
+    ),
+  ),
+  "justify-content": (
+    "prefix": "justify-content",
+    "value": (
+      "between": space-between,
+      "center": center,
+      "end": end,
+      "start": start,
+    ),
+  ),
+);
+
+// Generate utility classes for each size
+@each $utility, $map in $utilities {
+  $prefix: map-get($map, "prefix");
+  $values: map-get($map, "value");
+
+  // Generate padding utility classes for each size
+  @each $k, $v in $values {
+    @if ($k == "default") {
+      .#{$prefix} {
+        #{$utility}: $v;
+      }
+    } @else {
+      .#{$prefix}-#{$k} {
+        #{$utility}: $v;
+      }
+    }
+  }
+}

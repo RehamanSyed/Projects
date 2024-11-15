@@ -1,0 +1,62 @@
+@use "sass:math";
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: $space-xs;
+  padding: $space-md;
+  border: $base-border-thickness solid #ddd;
+  border-radius: math.div($base-border-radius, 4);
+
+  .image {
+    position: relative;
+    width: 140px;
+    height: 140px;
+  }
+
+  .card-content {
+    padding: $space-xs;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    .card-title {
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .available-stock {
+      font-size: 12px;
+     
+      // color: #fff;
+    }
+    .no-stock {
+      font-size: 12px;
+      position: absolute;
+      background: $accent-color;
+      left: 0;
+      top: 22px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 4px;
+      padding-right: 10px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .product-price {
+      h3 {
+        font-size: 20px;
+margin-top: 0px;
+        text-align: center;
+      }
+    }
+    p {
+      font-size: $font-size-base;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+// styles/components/_buttons.scss
+@use "sass:math";
+
+.btn {
+  @include btn;
+}
+.btn-rounded {
+  @include btn($primary-color); // Large border-radius for rounded buttons
+  border-radius: 60px;
+}
+.btn-square {
+  @include btn($primary-color); // Large border-radius for rounded buttons
+  border-radius: 6px;
+}
+
+@each $key, $val in $colors {
+  .btn-#{$key} {
+    border-color: darken($val, 10%);
+    background-color: darken($val, 10%);
+    color: #fff;
+
+    &:hover {
+      transform: scale(1.05);
+      color: #fff;
+      // background-color: darken($val, 10%);
+      border-color: darken($val, 10%);
+      background-color: darken($val, 10%);
+    }
+    &:disabled {
+      background-color: #cccccc;
+      border-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
+  .btn-outline-#{$key} {
+    background-color: white;
+    border: $base-border-thickness solid $val;
+    padding: 6px;
+    color: $val;
+    &:hover {
+      background-color: $val;
+      color: #fff;
+    }
+    &:disabled {
+      background-color: #cccccc;
+      border-color: #cccccc;
+      color: #000;
+      cursor: not-allowed;
+    }
+  }
+  .btn-plain-#{$key} {
+    padding: 10px;
+    background-color: white;
+    color: $val;
+    &:hover {
+      // background-color: $val;
+      // border: 1px solid $val;
+      // padding: 4px;
+      color:  $val;
+    }
+  }
+}
