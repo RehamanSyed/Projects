@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import ProductListing from "@/components/ProductListing";
 import { setProducts } from "@/store/cartSlice";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 
+console.log("process", process.env);
 async function fetchProducts() {
-  const res = await fetch("http://localhost:3000/products.json"); // Replace with your API or JSON path
+  const res = await fetch(`/products.json`);
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
@@ -17,7 +18,6 @@ export async function getServerSideProps() {
   const queryClient = new QueryClient();
   // Pre-fetch products
   await queryClient.prefetchQuery(["products"], fetchProducts);
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient), // Pass pre-fetched data
@@ -27,7 +27,7 @@ export async function getServerSideProps() {
 export default function Home({ dehydratedState }) {
   const dispatch = useDispatch();
   const { products: storedProducts } = useSelector((state) => state.cart);
- 
+
   // React Query to fetch data (can fallback to SSR data)
   const {
     data: products,
@@ -46,12 +46,10 @@ export default function Home({ dehydratedState }) {
     }
   }, [dispatch, products, storedProducts]);
 
-  // Render loading state if products are still being fetched
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  // Handle error state for fetching products
   if (isError) {
     return <div>Error loading products</div>;
   }
@@ -59,16 +57,14 @@ export default function Home({ dehydratedState }) {
   return (
     <div className="container">
       <div className="row">
-        {isLoading
-          ? "Loading..."
-          : products.map((product, idx) => (
-              <div
-                className="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2"
-                key={idx}
-              >
-                <ProductListing product={product} />
-              </div>
-            ))}
+        {products.map((product, idx) => (
+          <div
+            className="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2"
+            key={idx}
+          >
+            <ProductListing product={product} />
+          </div>
+        ))}
       </div>
     </div>
   );

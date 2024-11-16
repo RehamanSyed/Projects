@@ -6,7 +6,7 @@ import {
   decrementQuantity,
   removeFromCart,
 } from "@/store/cartSlice";
-// Assuming you have these components
+
 import { toast } from "react-toastify";
 import Image from "next/image";
 import { FiMinus } from "react-icons/fi";
@@ -16,12 +16,8 @@ import IconButton from "./ui/IconButton";
 import Button from "./ui/Button";
 
 const ProductListing = ({ product }) => {
-  
   const dispatch = useDispatch();
   const { products, items: cartItems } = useSelector((state) => state.cart);
-
-  // Directly use the product prop (instead of searching the products array)
- 
 
   const updatedProduct = products.find((p) => p.id === product.id);
   const cartItem = cartItems?.find((f) => f.id === updatedProduct.id);
@@ -34,7 +30,7 @@ const ProductListing = ({ product }) => {
   // Increment quantity in cart
   const handleIncrement = useCallback(() => {
     console.log(cartItem.quantity);
-    if (cartItem.quantity >= updatedProduct?.availableStock) {
+    if (updatedProduct?.availableStock === 0) {
       const toastId = "stockToast";
       if (!toast.isActive(toastId)) {
         toast.warn("The maximum number of quantity has been added.", {
@@ -70,7 +66,7 @@ const ProductListing = ({ product }) => {
           src={updatedProduct?.image}
           alt={updatedProduct?.title}
           fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
           style={{
             objectFit: "contain",
