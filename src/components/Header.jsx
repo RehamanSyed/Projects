@@ -13,27 +13,27 @@ const Header = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const cartItems = useSelector((state) => state.cart.items);
-  const products = useSelector((state) => state.cart.products);
+
+  
+
 
   return (
     <div className="container">
-      <div className="navbar">
-        <h1 style={{ fontSize: 32, fontWeight: "bold" }}>MyStore</h1>
+      <div className="navbar pt-4 pb-4">
+        <h1 style={{ fontSize: 28, fontWeight: "500" }}>My Store.com</h1>
 
-        <div>
-          <div style={{ position: "relative" }}>
-            <span className="badge">{cartItems.length}</span>
-            <IconButton
-              icon={<FaCartShopping size={16} />}
-              variant="btn-secondary btn-rounded p-4"
-              onClick={openModal}
-            />
-          </div>
+          {/* <p className="badge">{cartItems && cartItems?.length}</p> */}
+        <div style={{ position: "relative" }}>
+          <IconButton
+            icon={<FaCartShopping size={16} />}
+            variant="btn-secondary btn-rounded p-4"
+            onClick={openModal}
+          />
         </div>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <Cart products={products} onClose={closeModal} />
+        <Cart onClose={closeModal} />
       </Modal>
     </div>
   );

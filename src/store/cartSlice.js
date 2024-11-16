@@ -5,16 +5,26 @@ import { createSlice } from "@reduxjs/toolkit";
 const loadCartFromLocalStorage = () => {
   if (typeof window !== "undefined") {
     const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    const savedProducts = localStorage.getItem("products");
+
+    return {
+      items: savedCart ? JSON.parse(savedCart) : [],
+      products: savedProducts ? JSON.parse(savedProducts) : [],
+    };
   }
-  return [];
+  return { items: [], products: [] };
+};
+
+// Save cart and products to localStorage
+const saveToLocalStorage = (state) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("cart", JSON.stringify(state.items));
+    localStorage.setItem("products", JSON.stringify(state.products));
+  }
 };
 
 // Initial state for the cart
-const initialState = {
-  items: [], // Array of cart items
-  products: [], // Array of all available products
-};
+const initialState = loadCartFromLocalStorage();
 
 // Create the cart slice
 const cartSlice = createSlice({
@@ -22,116 +32,75 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
-      // Set initial products (with available stock)
       state.products = action.payload;
+      saveToLocalStorage(state); // Persist products to localStorage
     },
     addToCart: (state, action) => {
       const product = action.payload;
       const existingItem = state.items.find((i) => i.id === product.id);
 
-      // Prevent adding more than available stock
       if (existingItem) {
         existingItem.quantity += 1;
-        // Decrease stock after adding to cart
-        state.products = state.products.map((item) =>
-          item.id === product.id
-            ? { ...item, availableStock: item.availableStock - 1 }
-            : item
-        );
-        // if (existingItem.quantity < product.availableStock) {
-        // }
       } else {
         state.items.push({ ...product, quantity: 1 });
-        state.products = state.products.map((item) =>
-          item.id === product.id
-            ? { ...item, availableStock: item.availableStock - 1 }
-            : item
-        );
-        // if (product.availableStock > 0) {
-        //   // Decrease stock after adding to cart
-        // }
       }
 
-      // Update localStorage
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cart", JSON.stringify(state.items));
-      }
-    },
-    incrementQuantity: (state, action) => {
-      const item = state.items.find((f) => f.id === action.payload.id);
-      if (item) {
-        const product = state.products.find((f) => f.id === item.id);
-        // Prevent incrementing if stock is exhausted
-        item.quantity += 1;
-
-        // Decrease stock after increment
-        state.products = state.products.map((product) =>
-          product.id === item.id
-            ? { ...product, availableStock: product.availableStock - 1 }
-            : product
-        );
-        // if (item.quantity < product.availableStock) {
-        // }
-      }
-
-      // Update localStorage
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cart", JSON.stringify(state.items));
-      }
-    },
-    decrementQuantity: (state, action) => {
-      const item = state.items.find((f) => f.id === action.payload.id);
-      item.quantity -= 1;
-
-      // Increase stock after decrement
-      state.products = state.products.map((product) =>
-        product.id === item.id
-          ? { ...product, availableStock: product.availableStock + 1 }
-          : product
+      // Decrease stock after adding to cart
+      state.products = state.products.map((item) =>
+        item.id === product.id
+          ? { ...item, availableStock: item.availableStock - 1 }
+          : item
       );
-      // if (item && item.quantity > 1) {
-      // }
 
-      // Update localStorage
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cart", JSON.stringify(state.items));
-      }
+      saveToLocalStorage(state); // Persist to localStorage
     },
     removeFromCart: (state, action) => {
-      const product = state.items.find((f) => f.id === action.payload.id);
+      const cartItem = state.items.find((f) => f.id === action.payload.id);
 
-      if (product) {
+      if (cartItem) {
         state.items = state.items.filter((f) => f.id !== action.payload.id);
         // Increase stock after removing from cart
         state.products = state.products.map((item) =>
-          item.id === product.id
+          item.id === cartItem.id
             ? {
                 ...item,
-                availableStock: item.availableStock + product.quantity,
+                availableStock: item.availableStock + cartItem.quantity,
               }
             : item
         );
       }
 
-      // Update localStorage
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cart", JSON.stringify(state.items));
-      }
+      saveToLocalStorage(state); // Persist to localStorage
+    },
+    incrementQuantity: (state, action) => {
+      const cartItem = state.items.find((f) => f.id === action.payload.id);
+      cartItem.quantity += 1;
+
+      // Decrease stock after increment
+      state.products = state.products.map((item) =>
+        item.id === cartItem.id
+          ? { ...item, availableStock: item.availableStock - 1 }
+          : item
+      );
+
+      saveToLocalStorage(state); // Persist to localStorage
+    },
+    decrementQuantity: (state, action) => {
+      const cartItem = state.items.find((f) => f.id === action.payload.id);
+      cartItem.quantity -= 1;
+
+      // Increase stock after decrement
+      state.products = state.products.map((item) =>
+        item.id === cartItem.id
+          ? { ...item, availableStock: item.availableStock + 1 }
+          : item
+      );
+
+      saveToLocalStorage(state); // Persist to localStorage
     },
     clearCart: (state) => {
-      // Iterate over cart items and increase product stock based on quantity
-      state.items.forEach((item) => {
-        const product = state.products.find((prod) => prod.id === item.id);
-        if (product) {
-          product.availableStock += item.quantity;
-        }
-      });
       state.items = [];
-
-      // Remove from localStorage
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("cart");
-      }
+      saveToLocalStorage(state); // Persist to localStorage
     },
   },
 });

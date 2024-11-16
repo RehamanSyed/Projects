@@ -1,0 +1,62 @@
+// _reset.scss
+
+/* Normalize styles across browsers */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
+}
+
+p {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  margin-bottom: $space-md;
+}
+
+/* Remove default link underlines */
+a {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove table spacing */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+// /* Remove default input border */
+// input,
+// button,
+// textarea {
+//   border: none;
+//   outline: none;
+// }
+
+// /* Remove default background on buttons */
+// button {
+//   background: none;
+// }
+
+/* Allow block elements to break across lines */
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
