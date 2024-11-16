@@ -16,6 +16,7 @@ import IconButton from "./ui/IconButton";
 import Button from "./ui/Button";
 
 const ProductListing = ({ product }) => {
+  
   const dispatch = useDispatch();
   const { products, items: cartItems } = useSelector((state) => state.cart);
 
