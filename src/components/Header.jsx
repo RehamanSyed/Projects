@@ -17,8 +17,8 @@ const Header = () => {
 
   return (
     <div className="container">
-      <div className="navbar">
-        <h1 style={{ fontSize: 32, fontWeight: "bold" }}>MyStore</h1>
+      <div className="navbar pt-4 pb-4">
+        <h1 style={{ fontSize: 28, fontWeight: "500" }}>My Store.com</h1>
 
         <div>
           <div style={{ position: "relative" }}>

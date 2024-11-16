@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Image from "next/image";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,41 +10,51 @@ import {
 } from "@/store/cartSlice";
 
 import Button from "./ui/Button";
-import { FaCartShopping, FaMinus } from "react-icons/fa6";
+
 import IconButton from "./ui/IconButton";
-import { MdAdd, MdMinimize } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 import { LuTrash2 } from "react-icons/lu";
 import { FiMinus } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const ProductListing = ({ product }) => {
+  
   const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.cart.products);
-  const cartItems = useSelector((state) => state.cart.items);
+  const { products, items: cartItems } = useSelector((state) => state.cart);
   const updatedProduct = products.find((p) => p.id === product.id);
   const cartitem = cartItems?.find((f) => f.id === product.id);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     dispatch(addToCart(updatedProduct));
-  };
-  const handleIncrement = () => {
-    if (updatedProduct.availableStock === 0) {
-      toast.warn("The maximum number of quantity has been added.", {
-        hideProgressBar: true,
-        theme: "dark",
-      });
+  }, [dispatch, updatedProduct]);
 
+  const handleIncrement = useCallback(() => {
+    if (updatedProduct.availableStock === 0) {
+      const toastId = "stockToast"; // You can define a unique ID for this toast
+      if (!toast.isActive(toastId)) {
+        toast.warn("The maximum number of quantity has been added.", {
+          hideProgressBar: true,
+          theme: "dark",
+          toastId: toastId, // Assign the toast ID to prevent duplicate
+        });
+      }
       return;
     }
     dispatch(incrementQuantity({ id: product.id }));
-  };
-  const handleDecrement = () => {
+  }, [dispatch, updatedProduct, product.id]);
+
+  const handleDecrement = useCallback(() => {
     dispatch(decrementQuantity({ id: product.id }));
-  };
-  const handleRemoveCartItem = () => {
+  }, [dispatch, product.id]);
+
+  const handleRemoveCartItem = useCallback(() => {
     dispatch(removeFromCart({ id: product.id }));
-  };
+  }, [dispatch, product.id]);
+
+  const isInCart = cartitem?.quantity > 0;
+  const isOutOfStock = updatedProduct.availableStock === 0;
+  const isStockAvailable = updatedProduct.availableStock > 0;
 
   return (
     <div className="card">
@@ -55,14 +65,12 @@ const ProductListing = ({ product }) => {
           fill
           priority
           style={{
-            objectFit: "contain", // cover, contain, none
+            objectFit: "contain",
           }}
         />
       </div>
       <div className="card-content">
-        {updatedProduct.availableStock === 0 && (
-          <div className={"no-stock"}>Out of stock</div>
-        )}
+        {isOutOfStock && <div className={"no-stock"}>Out of stock</div>}
         <div className="card-title">{updatedProduct.title}</div>
         <div className={"available-stock"}>
           {`Available Stocks : ${updatedProduct.availableStock}`}
@@ -71,7 +79,7 @@ const ProductListing = ({ product }) => {
           <h3>{updatedProduct.price} SAR</h3>
         </div>
 
-        {cartitem?.quantity > 0 ? (
+        {isInCart ? (
           <div className="btncontianer">
             {cartitem?.quantity <= 1 ? (
               <IconButton
@@ -95,7 +103,7 @@ const ProductListing = ({ product }) => {
               onClick={handleIncrement}
             />
           </div>
-        ) : updatedProduct.availableStock > 0 ? (
+        ) : isStockAvailable ? (
           <Button
             variant="btn-outline-primary"
             label="Add to Cart"
